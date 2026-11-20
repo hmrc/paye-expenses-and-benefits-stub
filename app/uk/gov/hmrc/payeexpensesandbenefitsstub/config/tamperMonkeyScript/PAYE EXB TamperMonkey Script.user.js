@@ -17,7 +17,7 @@
 var scriptVersion = "1.0.1";
 
 // Where to land after sign in
-var servicePath = "/pay-as-you-earn-expenses-benefits-frontend";
+var servicePath = "/paye-expenses-and-benefits";
 var localServiceHost = "http://localhost:20113";
 
 // Landing pages, keyed by the profile's `landing` value
