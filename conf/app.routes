@@ -1,3 +1,7 @@
 # microservice specific routes
 
 GET        /hello-world             uk.gov.hmrc.payeexpensesandbenefitsstub.controllers.MicroserviceHelloWorldController.hello
+
+POST       /client-list/status                                         uk.gov.hmrc.payeexpensesandbenefitsstub.controllers.ClientListController.clientListStatus
+POST       /clients/all                                                uk.gov.hmrc.payeexpensesandbenefitsstub.controllers.ClientListController.allClients
+GET        /clientlistexchange/:service/:credentialId/agent/clientlist uk.gov.hmrc.payeexpensesandbenefitsstub.controllers.ClientListController.startClientListDownload(service: String, credentialId: String)

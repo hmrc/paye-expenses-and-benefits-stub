@@ -1,0 +1,37 @@
+{
+  "totalClients": 3,
+  "clients": [
+    {
+      "instanceId": 1001,
+      "employerName1": "Hedgehog Woodshop",
+      "districtNumber": 754,
+      "employerRef": "KG12677",
+      "aoReference": "754PA00012677",
+      "agentOwnRef": "HEDGE01",
+      "previousYearFiled": true
+    },
+    {
+      "instanceId": 1002,
+      "employerName1": "Acorn Bakery",
+      "employerName2": "Ltd",
+      "districtNumber": 120,
+      "employerRef": "AB45678",
+      "aoReference": "120PA00045678",
+      "previousYearFiled": true
+    },
+    {
+      "instanceId": 1003,
+      "employerName1": "Badger Building Services",
+      "districtNumber": 475,
+      "employerRef": "BB10001",
+      "aoReference": "475PA00010001",
+      "agentOwnRef": "BADGER",
+      "previousYearFiled": false
+    }
+  ],
+  "clientNameChars": [
+    "A",
+    "B",
+    "H"
+  ]
+}
