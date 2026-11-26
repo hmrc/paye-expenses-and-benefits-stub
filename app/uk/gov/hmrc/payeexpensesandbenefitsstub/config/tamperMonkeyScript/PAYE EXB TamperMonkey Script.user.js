@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         PAYE EXB Script
 // @namespace    http://localhost
-// @lastupdate   17/11/2026
-// @version      1.0.1
+// @lastupdate   25/11/2026
+// @version      1.1.0
 // @description  Automates logging in to PAYE Expenses and Benefits (PAYE EXB) via auth-login-stub. Install Tampermonkey on Chrome or Greasemonkey on Firefox and add this to your userscripts.
 // @match        http://localhost:9949/gg/sign-in*
 // @match        http://localhost:9949/auth-login-stub/gg-sign-in*
@@ -14,7 +14,7 @@
 // ==/UserScript==
 
 // Note: This should match the version on line 5
-var scriptVersion = "1.0.1";
+var scriptVersion = "1.1.0";
 
 // Where to land after sign in
 var servicePath = "/paye-expenses-and-benefits";
@@ -22,7 +22,7 @@ var localServiceHost = "http://localhost:20113";
 
 // Landing pages, keyed by the profile's `landing` value
 var LANDING_PAGES = {
-    AG1:  "/ag1",
+    AG1:  "/agent",
     ORG1: "/org1"
 };
 
@@ -74,6 +74,12 @@ var userProfiles = [
     { description: "Agent - agent reference AB9999",         affinityGroup: "Agent",        agentCode: "AGENTCODE1", email: "agent@example.com", landing: "AG1",  expect: "AG1",  enrolments: [enrol("AGENT", ACTIVATED, ["AB9999"])] },
     { description: "Organisation - EmpRef 456/CD12345",      affinityGroup: "Organisation", agentCode: "",           email: "org@example.com",   landing: "ORG1", expect: "ORG1", enrolments: [enrol("ORG", ACTIVATED, ["456", "CD12345"])] },
 
+    { divider: "Client List" },
+    { description: "Agent - client list not requested (-1)",     affinityGroup: "Agent", agentCode: "AGENTCODE1", email: "agent@example.com", authorityId: "CL-INITIATE",       landing: "AG1", expect: "AG1", enrolments: [enrol("AGENT")] },
+    { description: "Agent - client list in progress (0)",         affinityGroup: "Agent", agentCode: "AGENTCODE1", email: "agent@example.com", authorityId: "CL-IN-PROGRESS",    landing: "AG1", expect: "AG1", enrolments: [enrol("AGENT")] },
+    { description: "Agent - client list ready (1)",               affinityGroup: "Agent", agentCode: "AGENTCODE1", email: "agent@example.com", authorityId: "CL-CLIENTS",        landing: "AG1", expect: "AG1", enrolments: [enrol("AGENT")] },
+    { description: "Agent - client list failed (2)",              affinityGroup: "Agent", agentCode: "AGENTCODE1", email: "agent@example.com", authorityId: "CL-FAILED",         landing: "AG1", expect: "AG1", enrolments: [enrol("AGENT")] },
+
     { divider: "Not Activated" },
     { description: "Agent - IR-PAYE-AGENT not yet activated",  affinityGroup: "Agent",        agentCode: "AGENTCODE1", email: "agent@example.com", landing: "AG1",  expect: "Activate", enrolments: [enrol("AGENT", NOT_YET)] },
     { description: "Organisation - IR-PAYE not yet activated", affinityGroup: "Organisation", agentCode: "",           email: "org@example.com",   landing: "ORG1", expect: "Activate", enrolments: [enrol("ORG", NOT_YET)] },
@@ -95,6 +101,7 @@ var userProfiles = [
 var sectionColors = {
     'getting-started':  '#3b82f6',
     'stub-data':        '#10b981',
+    'client-list':      '#06b6d4',
     'not-activated':    '#f59e0b',
     'wrong-user-type':  '#8b5cf6',
     'unauthorised':     '#ef4444'
